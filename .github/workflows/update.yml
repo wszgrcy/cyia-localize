@@ -13,7 +13,7 @@ jobs:
         os: [ubuntu-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: wszgrcy/code-recycle-action
+      - uses: wszgrcy/code-recycle-action@main
         with:
           path: ./script/sync-localize.ts
           cwd: ./src
