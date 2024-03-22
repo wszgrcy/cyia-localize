@@ -1,0 +1,26 @@
+{
+  "1": {
+    "id": "6269992297457029737",
+    "text": "one",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "one"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "not overwrite"
+  },
+  "2": {
+    "id": "2697298659250494160",
+    "text": "two",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "two"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": ""
+  }
+}

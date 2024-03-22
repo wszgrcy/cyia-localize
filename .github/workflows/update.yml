@@ -1,0 +1,21 @@
+name: test
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: wszgrcy/code-recycle-action
+        with:
+          path: ./script/sync-localize.ts
+          cwd: ./src
+      - run: npm install
+      - run: npm test
