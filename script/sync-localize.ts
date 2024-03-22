@@ -1,4 +1,4 @@
-import { ScriptFunction, completePromise } from '@code-recycle/cli';
+import type { ScriptFunction } from '@code-recycle/cli';
 let fn: ScriptFunction = async (util, rule, host, injector) => {
   let data = await rule.os.gitClone(
     'https://github.com/angular/angular.git',
@@ -20,7 +20,11 @@ let fn: ScriptFunction = async (util, rule, host, injector) => {
     if (key.endsWith('bazel') || key.includes('/test')) {
       continue;
     }
-    await completePromise(host.write(util.path.join(util.path.normalize('./localize'), key), fileObj[key]));
+    await new Promise((res) => {
+      host.write(util.path.join(util.path.normalize('./localize'), key), fileObj[key]).subscribe({
+        complete: () => res(undefined),
+      });
+    });
   }
   let list = await util.changeList([
     {
