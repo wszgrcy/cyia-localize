@@ -1,4 +1,6 @@
 name: tag
+permissions:
+  contents: write
 on:
   workflow_dispatch:
     inputs:
@@ -6,8 +8,7 @@ on:
         description: '打标签'
         required: true
 
-env:
-  REPOSITORY_PATH: https://${{secrets.ACCESS_TOKEN}}@github.com/
+
 jobs:
   tag:
     runs-on: ${{ matrix.os }}
