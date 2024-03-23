@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - "master"
-env:
-  REPOSITORY_PATH: https://${{secrets.ACCESS_TOKEN}}@github.com/
+permissions:
+  contents: write
 jobs:
   publish:
     runs-on: ${{ matrix.os }}
