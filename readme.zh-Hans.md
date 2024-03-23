@@ -3,30 +3,31 @@
 
 ---
 
-# Introduction
+# 简介
 
-- `@angular/localize` standalone version, allowed for use in any node/front-end project
-- Extract/merge/convert translation files through commands `i18n` / `l10n`
+- `@angular/localize`独立版本,允许用于任何 node/前端 项目
+- 通过命令`i18n`/`l10n`提取/合并/转换翻译文件
 
 
-# Source
+# 来源
 
 - Angular 17.3.1
 
-## Usage
+## 使用方法
 
 ```ts
 import { $localize } from '@cyia/localize';
 $localize`one`;
 ```
-- Use `i18n ./src` Extract all `$localize` label template contents under `src` and generate `extract.json` metadata
-  > Generate ID consistent with `@angular/localize`
-- Copy `extract.json` custom language translation and write the translation content into the `target` field
-- Use `i18n convert ./i18n-merge ./i18n` Convert translation metadata to `key-value` format for reference
-- Custom reference format import translation, such as
+
+- 使用`i18n ./src` 提取`src`下所有`$localize`标签模板内容生成`extract.json`元数据
+  > 与`@angular/localize` 生成 id 一致
+- 复制`extract.json`自定义语言翻译,将翻译内容写入到`target`字段
+- 使用`i18n convert ./i18n-merge ./i18n`将翻译元数据转换为`key-value`格式用于引用
+- 自定义引用格式导入翻译,如
 
 ```ts
-// Node environment demonstration
+// node环境演示
 import path from 'path';
 import fs from 'fs';
 import { loadTranslations } from '@cyia/localize';
@@ -63,5 +64,6 @@ export function loadI18n() {
 loadI18n();
 ```
 
-## Merge other translations
-- If other dependency packages also use `@cyia/localize` and the published package contains translated/metadata text, use `i18n merge ./output ./pkg1 ./pkg2` merge multiple and then import them again
+## 合并其他翻译
+
+- 如果其他依赖包也使用了`@cyia/localize`并且发布包中含有翻译文本/元数据文本,可以使用`i18n merge ./output ./pkg1 ./pkg2`将多个合并,然后再导入
