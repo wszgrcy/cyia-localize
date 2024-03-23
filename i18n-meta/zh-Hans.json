@@ -1,0 +1,170 @@
+{
+  "8854798582008352047": {
+    "id": "8854798582008352047",
+    "text": "输出格式",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "输出格式"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "输出格式"
+  },
+  "9148710629420152102": {
+    "id": "9148710629420152102",
+    "text": "待翻译代码文件夹",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "待翻译代码文件夹"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "待翻译代码文件夹"
+  },
+  "8228150899955189359": {
+    "id": "8228150899955189359",
+    "text": "元数据输出文件夹",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "元数据输出文件夹"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "元数据输出文件夹"
+  },
+  "5764505695883366666": {
+    "id": "5764505695883366666",
+    "text": "正则匹配",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "正则匹配"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "正则匹配"
+  },
+  "172425973619832421": {
+    "id": "172425973619832421",
+    "text": "元数据名",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "元数据名"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "元数据名"
+  },
+  "6644092824683945049": {
+    "id": "6644092824683945049",
+    "text": "更新翻译元数据(会更新输出文件夹内的所有文件)",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "更新翻译元数据(会更新输出文件夹内的所有文件)"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "更新翻译元数据(会更新输出文件夹内的所有文件)"
+  },
+  "4602536547892723040": {
+    "id": "4602536547892723040",
+    "text": "提取代码中的 $localize 标签模板函数内容;使用 --update 可以直接更新文件夹内的翻译元数据,可以创建一个空翻译文件再执行更新",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "提取代码中的 $localize 标签模板函数内容;使用 --update 可以直接更新文件夹内的翻译元数据,可以创建一个空翻译文件再执行更新"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "提取代码中的 $localize 标签模板函数内容;使用 --update 可以直接更新文件夹内的翻译元数据,可以创建一个空翻译文件再执行更新"
+  },
+  "1359707629255117030": {
+    "id": "1359707629255117030",
+    "text": "元数据文件夹",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "元数据文件夹"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "元数据文件夹"
+  },
+  "7325030709800272957": {
+    "id": "7325030709800272957",
+    "text": "输出 key-value 格式;用于直接引用",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "输出 key-value 格式;用于直接引用"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "输出 key-value 格式;用于直接引用"
+  },
+  "4550868467630390053": {
+    "id": "4550868467630390053",
+    "text": "翻译元数据转换为代码可以引用的 key-value 格式",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "翻译元数据转换为代码可以引用的 key-value 格式"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "翻译元数据转换为代码可以引用的 key-value 格式"
+  },
+  "7019652923141591278": {
+    "id": "7019652923141591278",
+    "text": "导出文件夹",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "导出文件夹"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "导出文件夹"
+  },
+  "7673149086666070464": {
+    "id": "7673149086666070464",
+    "text": "翻译文件夹列表",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "翻译文件夹列表"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "翻译文件夹列表"
+  },
+  "3463923311488963679": {
+    "id": "3463923311488963679",
+    "text": "语言映射;第一个语言为输出名比如: en,en-us;cn,zh-cn 输出 en.json cn.json",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "语言映射;第一个语言为输出名比如: en,en-us;cn,zh-cn 输出 en.json cn.json"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "语言映射;第一个语言为输出名比如: en,en-us;cn,zh-cn 输出 en.json cn.json"
+  },
+  "4382030543399306865": {
+    "id": "4382030543399306865",
+    "text": "用于合并多个包的翻译文件/元数据",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "用于合并多个包的翻译文件/元数据"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "用于合并多个包的翻译文件/元数据"
+  }
+}

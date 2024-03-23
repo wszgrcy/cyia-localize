@@ -1,6 +1,6 @@
 {
   "name": "@cyia/localize",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Angular 本地化独立版本;Angular localize standalone version",
   "bin": {
     "i18n": "./bin/index.js",

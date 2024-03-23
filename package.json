@@ -6,8 +6,10 @@
   "scripts": {
     "sync:localize": "code-recycle ./script/sync-localize.ts --cwd ./src ",
     "test": "rimraf ./test/fixture-output && node --import tsx --inspect ./node_modules/.bin/mocha  \"test/**/*.ts\"",
-    "build": "rimraf ./dist && tsx ./script/build.cli.ts && tsc -p ./tsconfig.build-import.json && tsx ./script/build.import.ts && cpx \"./*.md\" ./dist && cpx ./src/package.json ./dist",
-    "release-publish": "npm run build && npm --registry=http://192.168.31.88:5555 publish ./dist"
+    "build": "rimraf ./dist && tsx ./script/build.cli.ts && tsc -p ./tsconfig.build-import.json && tsx ./script/build.import.ts && cpx \"./*.md\" ./dist && cpx ./src/package.json ./dist && npm run i18n:convert",
+    "release-publish": "npm run build && npm --registry=http://192.168.31.88:5555 publish ./dist",
+    "i18n:init": "tsx ./src/bin/index.ts ./src ./i18n-meta --update --name zh-Hans",
+    "i18n:convert": "tsx ./src/bin/index.ts convert ./i18n-meta ./dist/bin/i18n"
   },
   "bin": {
     "i18n": "./lib/bin/index.js",

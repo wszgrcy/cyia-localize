@@ -26,7 +26,7 @@ export async function extract(
   options: { name: string; pattern: string; dryRun?: boolean; format: FileFormat; update: boolean }
 ) {
   let result = await codeRecycleByNode(path, root, { config: { dryRun: options.dryRun } });
-  const createFileName = `${options.name}.json`;
+  const createFileName = `${options.name}.${options.format}`;
   let obj = {} as Record<string, any>;
 
   return result(async (util, rule, host, injector) => {
@@ -99,7 +99,7 @@ export async function extract(
       },
       {
         type: 'create',
-        path: join(output, `${options.name}.${options.format}`),
+        path: join(output, createFileName),
         content: async (context) => {
           context = context.getContext('root.match');
           for (const childContext of context.children) {
@@ -116,7 +116,7 @@ export async function extract(
               delete (result as any).substitutions;
               delete result.location;
               delete result.legacyIds;
-              (result as any).target = '';
+              (result as any).target = options.update ? result.text : '';
               obj[result.id] = result;
             }
           }
@@ -131,13 +131,14 @@ export async function extract(
       for (const item of fileList) {
         if (['.yaml', '.yml', '.json'].some((ext) => item.endsWith(ext))) {
           let filePath = path.join(outputDir, item);
-          let data = await parseFile(filePath);
+          let data = await parseFile(filePath).catch(() => ({} as Record<string, any>));
           let newData = {} as Record<string, any>;
           for (const key in obj) {
             if (key in data) {
               newData[key] = data[key];
             } else {
               newData[key] = obj[key];
+              newData[key].target = '';
             }
           }
           await completePromise(host.write(filePath, stringToFileBuffer(formatContent(newData, fileFormat(item)))));
