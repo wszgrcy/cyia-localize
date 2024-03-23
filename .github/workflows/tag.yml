@@ -1,0 +1,26 @@
+name: tag
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: '打标签'
+        required: true
+
+env:
+  REPOSITORY_PATH: https://${{secrets.ACCESS_TOKEN}}@github.com/
+jobs:
+  tag:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: true
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - name: init
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@gmail.com"
+      - uses: actions/checkout@v4
+      - run: |
+          git tag v${{github.event.inputs.tag}}
+          git push origin v${{github.event.inputs.tag}}
