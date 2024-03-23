@@ -65,5 +65,7 @@ loadI18n();
 ```
 
 ## 合并其他翻译
-
 - 如果其他依赖包也使用了`@cyia/localize`并且发布包中含有翻译文本/元数据文本,可以使用`i18n merge ./output ./pkg1 ./pkg2`将多个合并,然后再导入
+
+## 更新已有翻译
+- `i18n ./src ./i18n-meta --update --name zh-Hans`提取内容后以`zh-Hans`为原始文件(不需要翻译),其他语言的文件会添加/删除相应文本

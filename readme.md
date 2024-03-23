@@ -65,3 +65,6 @@ loadI18n();
 
 ## Merge other translations
 - If other dependency packages also use `@cyia/localize` and the published package contains translated/metadata text, use `i18n merge ./output ./pkg1 ./pkg2` merge multiple and then import them again
+
+## Update existing translations
+- `i18n ./src ./i18n-meta --update --name zh-Hans`Extract the content and use `zh-Hans` as the original file (no translation required), while files in other languages will add/remove corresponding text

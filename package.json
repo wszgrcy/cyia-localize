@@ -2,7 +2,6 @@
   "name": "@cyia/localize",
   "version": "0.0.0",
   "description": "Angular 本地化独立版本;Angular localize standalone version",
-  "main": "./lib/index.js",
   "scripts": {
     "sync:localize": "code-recycle ./script/sync-localize.ts --cwd ./src ",
     "test": "rimraf ./test/fixture-output && node --import tsx --inspect ./node_modules/.bin/mocha  \"test/**/*.ts\"",
@@ -11,11 +10,7 @@
     "i18n:init": "tsx ./src/bin/index.ts ./src ./i18n-meta --update --name zh-Hans",
     "i18n:convert": "tsx ./src/bin/index.ts convert ./i18n-meta ./dist/bin/i18n"
   },
-  "bin": {
-    "i18n": "./lib/bin/index.js",
-    "l10n": "./lib/bin/index.js"
-  },
-  "author": "",
+  "author": "wszgrcy",
   "private": true,
   "devDependencies": {
     "@types/chai": "^4.3.14",

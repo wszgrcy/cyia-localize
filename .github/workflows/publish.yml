@@ -3,7 +3,8 @@ on:
   push:
     branches:
       - "master"
-
+env:
+  REPOSITORY_PATH: https://${{secrets.ACCESS_TOKEN}}@github.com/
 jobs:
   publish:
     runs-on: ${{ matrix.os }}
@@ -12,6 +13,10 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     steps:
+      - name: init
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@gmail.com"
       - uses: actions/checkout@v4
       - name: install-node
         uses: actions/setup-node@v1
