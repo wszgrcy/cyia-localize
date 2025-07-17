@@ -5,14 +5,14 @@ let fn: ScriptFunction = async (util, rule, host, injector) => {
     'packages/localize/src',
     'packages/localize/src',
     'branch',
-    '17.3.1'
+    '20.1.1'
   );
   let digest = await rule.os.gitClone(
     'https://github.com/angular/angular.git',
     'packages/compiler/src/i18n/digest.ts',
     'packages/compiler/src/i18n',
     'branch',
-    '17.3.1'
+    '20.1.1'
   );
 
   let fileObj = { ...data, ...digest };

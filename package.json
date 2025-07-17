@@ -5,7 +5,7 @@
   "scripts": {
     "sync:localize": "code-recycle ./script/sync-localize.ts --cwd ./src ",
     "test": "rimraf ./test/fixture-output && node --import tsx --inspect ./node_modules/.bin/mocha  \"test/**/*.ts\"",
-    "build": "rimraf ./dist && tsx ./script/build.cli.ts && tsc -p ./tsconfig.build-import.json && tsx ./script/build.import.ts && cpx \"./*.md\" ./dist && cpx ./src/package.json ./dist && npm run i18n:convert",
+    "build": "rimraf ./dist && tsx ./script/build.cli.ts && tsc -p ./tsconfig.build-import.json && tsx ./script/build.import.ts && cpx \"./*.md\" ./dist && cpx ./assets/package.json ./dist && npm run i18n:convert",
     "release-publish": "npm run build && npm --registry=http://192.168.31.88:5555 publish ./dist",
     "i18n:init": "tsx ./src/bin/index.ts ./src ./i18n-meta --update --name zh-Hans",
     "i18n:convert": "tsx ./src/bin/index.ts convert ./i18n-meta ./dist/bin/i18n"
@@ -18,10 +18,10 @@
     "@types/node": "^20.11.30",
     "chai": "5.1.0",
     "cpx": "^1.5.0",
-    "esbuild": "^0.20.2",
+    "esbuild": "^0.25.6",
     "mocha": "^10.3.0",
     "rimraf": "^5.0.5",
-    "tsx": "^4.7.1"
+    "tsx": "^4.20.3"
   },
   "dependencies": {
     "@code-recycle/cli": "1.3.10",

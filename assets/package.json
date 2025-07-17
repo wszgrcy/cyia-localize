@@ -1,6 +1,6 @@
 {
   "name": "@cyia/localize",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Angular 本地化独立版本;Angular localize standalone version",
   "keywords": [
     "i18n",
@@ -32,8 +32,14 @@
       "import": "./fesm2022/index.mjs",
       "require": "./commonjs/index.js",
       "default": "./commonjs/index.js",
-      "esm2022": "./fesm2022/index.mjs",
       "esm": "./fesm2022/index.mjs"
+    },
+    "./cli": {
+      "types": "./cli/index.d.ts",
+      "import": "./cli/index.mjs",
+      "require": "./cli/index.js",
+      "default": "./cli/index.js",
+      "esm": "./cli/index.mjs"
     }
   },
   "dependencies": {
