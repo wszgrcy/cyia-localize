@@ -83,6 +83,42 @@
     "associatedMessageIds": {},
     "target": "Extract the content of the $localize tag template function from the code; Use --update to directly update the translation metadata in the folder, and create an empty translation file before executing the update"
   },
+  "1353507989461630931": {
+    "id": "1353507989461630931",
+    "text": "纯文本列表",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "纯文本列表"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "plain list"
+  },
+  "1197867220518221681": {
+    "id": "1197867220518221681",
+    "text": "输出",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "输出"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "output"
+  },
+  "6657090984283911157": {
+    "id": "6657090984283911157",
+    "text": "纯文本翻译",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "纯文本翻译"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "plain list translate"
+  },
   "1359707629255117030": {
     "id": "1359707629255117030",
     "text": "元数据文件夹",

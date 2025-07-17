@@ -83,6 +83,42 @@
     "associatedMessageIds": {},
     "target": "提取代码中的 $localize 标签模板函数内容;使用 --update 可以直接更新文件夹内的翻译元数据,可以创建一个空翻译文件再执行更新"
   },
+  "1353507989461630931": {
+    "id": "1353507989461630931",
+    "text": "纯文本列表",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "纯文本列表"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "纯文本列表"
+  },
+  "1197867220518221681": {
+    "id": "1197867220518221681",
+    "text": "输出",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "输出"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "输出"
+  },
+  "6657090984283911157": {
+    "id": "6657090984283911157",
+    "text": "纯文本翻译",
+    "meaning": "",
+    "description": "",
+    "messageParts": [
+      "纯文本翻译"
+    ],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "target": "纯文本翻译"
+  },
   "1359707629255117030": {
     "id": "1359707629255117030",
     "text": "元数据文件夹",
