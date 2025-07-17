@@ -26,14 +26,15 @@ export async function plainList(input: string, output: string, options: { format
   let locName = `${options.name}.${options.format}`;
   if (list.length) {
     for (const item of list) {
-      let isSource = locName === item;
-      let filePath = path.join(outputFilePath, item);
-      let originContent = await parseFile(filePath);
-      for (const x in obj) {
-        let item = obj[x];
+      const objClone = { ...obj };
+      const isSource = locName === item;
+      const filePath = path.join(outputFilePath, item);
+      const originContent = await parseFile(filePath);
+      for (const x in objClone) {
+        const item = objClone[x];
         item.target = isSource ? item.text : options.update ? originContent[x]?.target ?? '' : '';
       }
-      await writeFile(filePath, formatContent(obj, options.format));
+      await writeFile(filePath, formatContent(objClone, options.format));
     }
   } else {
     for (const x in obj) {
