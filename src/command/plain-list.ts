@@ -5,13 +5,23 @@ import { parseMessage } from '../localize/utils';
 import { formatContent } from '../util/format-content';
 import { mkdir, readdir, writeFile } from 'fs/promises';
 
+function _tagged_template_literal(strings: string[]) {
+  const raw = strings.slice(0);
+
+  return Object.freeze(
+    Object.defineProperties(strings, {
+      raw: {
+        value: Object.freeze(raw),
+      },
+    })
+  ) as TemplateStringsArray;
+}
+
 export async function plainList(input: string, output: string, options: { format: FileFormat; update: boolean; name: string }) {
   let content = await parseFile<string[]>(path.join(process.cwd(), input));
   let obj = {} as Record<string, any>;
   for (const item of content) {
-    let data = [item];
-    (data as any).raw = item;
-    let result = parseMessage(data as any, []);
+    let result = parseMessage(_tagged_template_literal([item]));
     delete result.customId;
     delete result.messagePartLocations;
     delete result.substitutionLocations;
