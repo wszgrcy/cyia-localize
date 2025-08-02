@@ -1,6 +1,6 @@
 {
   "name": "@cyia/localize",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Angular 本地化独立版本;Angular localize standalone version",
   "keywords": [
     "i18n",

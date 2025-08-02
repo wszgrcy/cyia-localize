@@ -130,7 +130,7 @@ export async function extract(
 
       for (const item of fileList) {
         if (['.yaml', '.yml', '.json'].some((ext) => item.endsWith(ext))) {
-          let filePath = path.join(outputDir, item);
+          let filePath = join(output, item);
           let data = await parseFile(filePath).catch(() => ({} as Record<string, any>));
           let newData = {} as Record<string, any>;
           for (const key in obj) {
@@ -141,7 +141,7 @@ export async function extract(
               newData[key].target = '';
             }
           }
-          await completePromise(host.write(filePath, stringToFileBuffer(formatContent(newData, fileFormat(item)))));
+          await completePromise(host.write(path.normalize(filePath) , stringToFileBuffer(formatContent(newData, fileFormat(item)))));
         }
       }
     }
