@@ -1,10 +1,11 @@
 import { QueryContext, codeRecycleByNode, completePromise, stringToFileBuffer } from '@code-recycle/cli';
-import { parseMessage } from '../localize/utils';
+import { parseMessage, SourceLocation } from '../localize/utils';
 import { join } from 'path';
 import { formatContent } from '../util/format-content';
 import { FileFormat } from '../type';
 import { parseFile } from '../util/parse-file';
 import { fileFormat } from '../util/file-format';
+import indexToPosition from 'index-to-position';
 type TextData = { rawText: string; text: string };
 function getNodeTextData(item: QueryContext): TextData {
   return {
@@ -23,7 +24,7 @@ export async function extract(
   path: string,
   output: string,
   root: string,
-  options: { name: string; pattern: string; dryRun?: boolean; format: FileFormat; update: boolean }
+  options: { name: string; pattern: string; dryRun?: boolean; format: FileFormat; update: boolean },
 ) {
   let result = await codeRecycleByNode(path, root, { config: { dryRun: options.dryRun } });
   const createFileName = `${options.name}.${options.format}`;
@@ -86,13 +87,22 @@ export async function extract(
               },
             ],
             callback(context, index) {
+              let startPos = indexToPosition(context.node!.content, context.node!.node!.range[0]);
+              let endPos = indexToPosition(context.node!.content, context.node!.node!.range[1]);
               let hasVar = context.getContext('hasVar', true);
               let origin = context.getContext('origin', true);
               let data = hasVar?.data || origin?.data;
               let rawTextList = (data as TextData[]).map((item) => item.rawText);
               let textList = (data as TextData[]).map((item) => item.text);
               (textList as any).raw = rawTextList;
-              context.data = textList;
+              context.data = {
+                messageParts: textList,
+                location: {
+                  start: startPos,
+                  end: endPos,
+                  file: (context as any).util.path.getSystemPath(context.node!.path),
+                } as SourceLocation,
+              };
             },
           },
         ],
@@ -105,16 +115,15 @@ export async function extract(
           for (const childContext of context.children) {
             let listContext = childContext.getContext('transList', true);
             for (const item of listContext!.children) {
-              let list = item.data as TemplateStringsArray[];
+              let list = item.data.messageParts as TemplateStringsArray[];
               if (!list.length) {
                 continue;
               }
-              let result = parseMessage(list as any, []);
+              let result = parseMessage(list as any, [], item.data.location);
               delete result.customId;
               delete result.messagePartLocations;
               delete result.substitutionLocations;
               delete (result as any).substitutions;
-              delete result.location;
               delete result.legacyIds;
               (result as any).target = options.update ? result.text : '';
               obj[result.id] = result;
@@ -131,7 +140,7 @@ export async function extract(
       for (const item of fileList) {
         if (['.yaml', '.yml', '.json'].some((ext) => item.endsWith(ext))) {
           let filePath = join(output, item);
-          let data = await parseFile(filePath).catch(() => ({} as Record<string, any>));
+          let data = await parseFile(filePath).catch(() => ({}) as Record<string, any>);
           let newData = {} as Record<string, any>;
           for (const key in obj) {
             if (key in data) {
@@ -141,7 +150,7 @@ export async function extract(
               newData[key].target = '';
             }
           }
-          await completePromise(host.write(path.normalize(filePath) , stringToFileBuffer(formatContent(newData, fileFormat(item)))));
+          await completePromise(host.write(path.normalize(filePath), stringToFileBuffer(formatContent(newData, fileFormat(item)))));
         }
       }
     }

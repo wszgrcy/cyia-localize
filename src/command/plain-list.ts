@@ -26,7 +26,6 @@ export async function plainList(input: string, output: string, options: { format
     delete result.messagePartLocations;
     delete result.substitutionLocations;
     delete (result as any).substitutions;
-    delete result.location;
     delete result.legacyIds;
     obj[result.id] = result;
   }

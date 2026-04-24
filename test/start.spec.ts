@@ -13,6 +13,9 @@ describe('main', () => {
     let content = fileBufferToString((runner as any).content);
     let data = JSON.parse(content);
     expect(Object.keys(data).length).eq(8);
+    for (const key in data) {
+      expect(data[key].location).ok;
+    }
   });
   it('yaml', async () => {
     let [runner] = await extract(__dirname + '/fixture/start', __dirname + '/fixture/start', __dirname, {
