@@ -1,6 +1,6 @@
 {
   "name": "@cyia/localize",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Angular 本地化独立版本;Angular localize standalone version",
   "keywords": [
     "i18n",
@@ -48,9 +48,5 @@
     "yaml": "2.4.1",
     "index-to-position": "^1.2.0"
   },
-  "sideEffects": false,
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
-  }
+  "sideEffects": false
 }

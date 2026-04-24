@@ -18,11 +18,12 @@ jobs:
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@gmail.com"
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: install-node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v6
         with:
-          node-version: 20.x
+          node-version: 24.x
+          registry-url: 'https://registry.npmjs.org'
       - uses: wszgrcy/code-recycle-action@main
         with:
           path: ./script/sync-localize.ts
