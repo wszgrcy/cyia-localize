@@ -36,7 +36,7 @@ export async function extract(
     await util.changeList([
       {
         path: options.pattern,
-        excludeList: ['node_modules'],
+        ignoreList: ['node_modules'],
         glob: true,
         name: 'match',
         list: [
