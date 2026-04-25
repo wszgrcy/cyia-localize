@@ -3,6 +3,7 @@ import { program, Option } from 'commander';
 import { extract, DefaultOptions } from '../command/extract';
 import { convert } from '../command/convert';
 import { merge } from '../command/merge';
+import { mergeConvert } from '../command/merge-convert';
 import { resolve } from 'path';
 import { $localize } from '../index';
 import { loadI18n } from '../load.node';
@@ -57,5 +58,16 @@ program
     await merge(dir, format, output, map);
   })
   .description($localize`用于合并多个包的翻译文件/元数据`);
+
+program
+  .command('merge-convert')
+  .argument('<output>', $localize`输出文件夹`)
+  .argument('<path...>', $localize`翻译文件夹列表`)
+  .addOption(format)
+  .option('-m, --map [string]', $localize`语言映射;第一个语言为输出名比如: en,en-us;cn,zh-cn 输出 en.json cn.json`)
+  .action(async (output: string, dir: string[], { format, map }) => {
+    await mergeConvert(dir, format, output, map);
+  })
+  .description($localize`直接生成最终翻译文件（合并+转换），只写入一次文件`);
 
 program.parse(process.argv);

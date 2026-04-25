@@ -3,8 +3,9 @@ import path, { basename, extname, join, resolve } from 'path';
 import { parseFile } from '../util/parse-file';
 import { formatContent } from '../util/format-content';
 import { FileFormat } from '../type';
-/** 合并多个包的配置 */
-export async function merge(dirList: string[], format: FileFormat, output: string, map: string = '') {
+
+/** 合并多个包的配置，返回合并后的数据对象（不写入文件） */
+export async function mergeToData(dirList: string[],  map: string = '') {
   const cwd = process.cwd();
   let languageObj = {} as Record<string, Record<string, any>>;
   let mapObj = map.split(':').reduce((obj, item) => {
@@ -27,7 +28,13 @@ export async function merge(dirList: string[], format: FileFormat, output: strin
       languageObj[name] = { ...fileData, ...languageObj[name] };
     }
   }
-  let outputDir = resolve(cwd, output);
+  return languageObj;
+}
+
+/** 合并多个包的配置并写入文件 */
+export async function merge(dirList: string[], format: FileFormat, output: string, map: string = '') {
+  const languageObj = await mergeToData(dirList, map);
+  let outputDir = resolve(process.cwd(), output);
   await mkdir(outputDir, { recursive: true });
   for (const key in languageObj) {
     await writeFile(join(outputDir, `${key}.${format}`), formatContent(languageObj[key], format));
