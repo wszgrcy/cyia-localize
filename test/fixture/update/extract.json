@@ -1,0 +1,17 @@
+{
+  "6269992297457029737": {
+    "id": "6269992297457029737",
+    "text": "one",
+    "meaning": "",
+    "description": "",
+    "messageParts": ["one"],
+    "placeholderNames": [],
+    "associatedMessageIds": {},
+    "location": {
+      "start": { "line": 1, "column": 0 },
+      "end": { "line": 1, "column": 14 },
+      "file": "C:\\\\code\\\\my-project\\\\cyia-localize\\\\test\\\\fixture\\\\update\\\\1.ts"
+    },
+    "target": "one"
+  }
+}

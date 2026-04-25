@@ -15,13 +15,15 @@ program
   .enablePositionalOptions()
   .option('-p, --pattern [string]', $localize`正则匹配`, DefaultOptions.pattern)
   .option('-n, --name [string]', $localize`元数据名`, DefaultOptions.name)
-  .option('--update [boolean]', $localize`更新翻译元数据(会更新输出文件夹内的所有文件)`, DefaultOptions.update)
+  .option('-l, --locales [string]', $localize`语言代号列表(逗号分割)`, '')
   .addOption(format)
   .action(async (input, output, options) => {
-    await extract(resolve(process.cwd(), input), resolve(process.cwd(), output), process.cwd(), options);
+    const locales = options.locales?.split(',');
+    console.log('Locales:', locales);
+    await extract(resolve(process.cwd(), input), resolve(process.cwd(), output), process.cwd(), options, locales);
   })
   .description(
-    $localize`提取代码中的 $localize 标签模板函数内容;使用 --update 可以直接更新文件夹内的翻译元数据,可以创建一个空翻译文件再执行更新`
+    $localize`提取代码中的 $localize 标签模板函数内容;使用 --update 可以直接更新文件夹内的翻译元数据,可以创建一个空翻译文件再执行更新`,
   );
 program
   .command('pl')

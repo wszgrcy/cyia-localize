@@ -1,4 +1,4 @@
-import { QueryContext, codeRecycleByNode, completePromise, stringToFileBuffer } from '@code-recycle/cli';
+import { QueryContext, codeRecycleByNode, completePromise, nextPromise, stringToFileBuffer } from '@code-recycle/cli';
 import { parseMessage, SourceLocation } from '../localize/utils';
 import { join } from 'path';
 import { formatContent } from '../util/format-content';
@@ -24,7 +24,8 @@ export async function extract(
   path: string,
   output: string,
   root: string,
-  options: { name: string; pattern: string; dryRun?: boolean; format: FileFormat; update: boolean },
+  options: { name: string; pattern: string; dryRun?: boolean; format: FileFormat },
+  locales?: string[],
 ) {
   let result = await codeRecycleByNode(path, root, { config: { dryRun: options.dryRun } });
   const createFileName = `${options.name}.${options.format}`;
@@ -125,7 +126,7 @@ export async function extract(
               delete result.substitutionLocations;
               delete (result as any).substitutions;
               delete result.legacyIds;
-              (result as any).target = options.update ? result.text : '';
+              (result as any).target = result.text;
               obj[result.id] = result;
             }
           }
@@ -133,25 +134,25 @@ export async function extract(
         },
       },
     ]);
-    if (options.update) {
-      let outputDir = util.path.normalize(output);
-      let fileList = await host.listAll(outputDir, { excludeList: [createFileName] });
 
-      for (const item of fileList) {
-        if (['.yaml', '.yml', '.json'].some((ext) => item.endsWith(ext))) {
-          let filePath = join(output, item);
-          let data = await parseFile(filePath).catch(() => ({}) as Record<string, any>);
-          let newData = {} as Record<string, any>;
-          for (const key in obj) {
-            if (key in data) {
-              newData[key] = data[key];
-            } else {
-              newData[key] = obj[key];
-              newData[key].target = '';
-            }
+    if (locales?.length) {
+      for (const locale of locales) {
+        const localeFileName = `${options.name}.${locale}.${options.format}`;
+        const filePath = join(output, localeFileName);
+
+        const isExist = await nextPromise(host.exists(path.normalize(filePath)));
+        let existingData = (isExist ? await parseFile(filePath).catch(() => ({})) : {}) as Record<string, any>;
+
+        let newData = {} as Record<string, any>;
+        for (const key in obj) {
+          if (key in existingData) {
+            newData[key] = { ...obj[key], target: existingData[key].target };
+          } else {
+            newData[key] = obj[key];
+            newData[key].target = '';
           }
-          await completePromise(host.write(path.normalize(filePath), stringToFileBuffer(formatContent(newData, fileFormat(item)))));
         }
+        await completePromise(host.write(path.normalize(filePath), stringToFileBuffer(formatContent(newData, options.format))));
       }
     }
     return host.records();

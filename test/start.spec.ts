@@ -55,16 +55,24 @@ describe('main', () => {
     expect(Object.keys(data).length).eq(2);
   });
   it('更新', async () => {
-    let [runner, changed] = await extract(__dirname + '/fixture/update', __dirname + '/fixture/update', __dirname, {
-      ...DefaultOptions,
-      dryRun: true,
-      update: true,
-    });
+    let [runner, changed] = await extract(
+      __dirname + '/fixture/update',
+      __dirname + '/fixture/update',
+      __dirname,
+      {
+        ...DefaultOptions,
+        dryRun: true,
+      },
+      ['num'],
+    );
     expect(runner).ok;
-    expect(runner.kind).eq('create');
-    let changedString = fileBufferToString((changed as any).content);
-    let changedData = JSON.parse(changedString);
+    expect(runner.kind).eq('overwrite');
+    let changedString = fileBufferToString((runner as any).content);
+    expect(Object.keys(JSON.parse(changedString)).length).eq(2);
+    let update2 = fileBufferToString((changed as any).content);
+    let changedData = JSON.parse(update2);
     expect(changedData['6269992297457029737'].target).eq('1');
+    expect(changedData['6269992297457029737'].location.start.line).eq(1);
     expect(Object.keys(changedData).length).eq(2);
   });
 });
